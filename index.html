@@ -6,6 +6,11 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
 		<style>
+			@font-face {
+				font-family: "Eina-Regular";
+				src: url("/public/fonts/Eina02-Regular.ttf");
+			}
+
 			html,
 			body {
 				margin: 0;
@@ -20,12 +25,101 @@
 				overflow: hidden;
 				color: "white";
 			}
+			/* The Modal (background) */
+			.modal {
+				display: block; /* Hidden by default */
+				position: fixed; /* Stay in place */
+				z-index: 1; /* Sit on top */
+				left: 0;
+				top: 0;
+				background-color: black;
+				width: 100%; /* Full width */
+				height: 100%; /* Full height */
+				overflow: auto; /* Enable scroll if needed */
+				background-color: rgb(0, 0, 0); /* Fallback color */
+				background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+			}
+
+			/* Modal Content/Box */
+			.modal-content {
+				background-color: #222531;
+				margin: 15% auto; /* 15% from the top and centered */
+				padding: 10px;
+				/* border: 1px solid #640ad7	; */
+				width: 40%; /* Could be more or less, depending on screen size */
+				color: white;
+				font-family: "Eina-Regular";
+			}
+
+			@media (pointer: coarse)  {
+				.modal-content {
+					background-color: #222531;
+					margin: 15% auto; 
+					padding: 10px;
+					width: 90%; 
+					color: white;
+					font-family: "Eina-Regular";
+				}	
+			}
+
+			/* The Close Button */
+
+			#closeBtn:hover {
+				text-decoration: none;
+				cursor: pointer;
+				background-color: #95adac !important;
+			}
 		</style>
+
 		<script src="s3/sdk/sdk.1.7.4.js"></script>
 	</head>
 	<body>
+		<!-- Trigger/Open The Modal -->
+		<!-- <button id="myBtn">Open Modal</button> -->
+
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content" style="border-radius: 15px">
+				<!-- <span class="close">&times;</span> -->
+				<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
+				<p style="padding: 5%; text-align: center;">
+					Some countries may not be allowed to use perpetual trading
+					portal - more details available in <a style="color:#640ad7;" href="https://kromatika.finance/terms-of-use" target="_blank">Terms of Use, section 2</a>.
+				</br></br>By clicking "Agree" you accept the Terms and Conditions by
+					Kromatika.Finance
+				</p>
+				<div
+					style="
+						display: flex;
+						justify-content: center;
+						padding-bottom: 10px;
+					"
+				>
+					<button
+						id="closeBtn"
+						style="
+							background-color: #b7d5d4;
+							border: 0;
+							border-radius: 15px;
+							padding: 15px;
+						"
+					>
+						I agree
+					</button>
+				</div>
+			</div>
+		</div>
 		<div id="app"></div>
 		<script>
+			// Get the button that opens the modal
+			var btn = document.getElementById("closeBtn");
+			var modal = document.getElementById("myModal");
+			// When the user clicks on the button, open the modal
+			btn.onclick = function () {
+				modal.style.display = "none";
+			};
+			
 			const { origin, protocol } = window.location;
 			const isDev = protocol === "http:";
 			FuturesSDK.createTradeUI({
@@ -48,7 +142,7 @@
 						tokenNetwork: "eth",
 						pricePrecision: 8,
 						priceUrl:
-							"https://static.coinpaprika.com/coin/krom-kromatikafinance/logo.png?rev=10691015",
+							"https://coinmarketcap.com/fr/currencies/kromatika/",
 						priceLogoUrl:
 							"https://static.coinpaprika.com/coin/krom-kromatikafinance/logo.png?rev=10691015",
 					},
