@@ -27,7 +27,7 @@
 			}
 			/* The Modal (background) */
 			.modal {
-				display: block; /* Hidden by default */
+				display: none; /* Hidden by default */
 				position: fixed; /* Stay in place */
 				z-index: 1; /* Sit on top */
 				left: 0;
@@ -80,33 +80,41 @@
 		<!-- The Modal -->
 		<div id="myModal" class="modal">
 			<!-- Modal content -->
-			<div class="modal-content" style="border-radius: 15px">
+			<div class="modal-content" style="border-radius: 15px;">
 				<!-- <span class="close">&times;</span> -->
-				<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
-				<p style="padding: 5%; text-align: center;">
-					Some countries may not be allowed to use perpetual trading
-					portal - more details available in <a style="color:#640ad7;" href="https://kromatika.finance/terms-of-use" target="_blank">Terms of Use, section 2</a>.
-				</br></br>By clicking "Agree" you accept the Terms and Conditions by
-					Kromatika.Finance
-				</p>
-				<div
-					style="
-						display: flex;
-						justify-content: center;
-						padding-bottom: 10px;
-					"
-				>
-					<button
-						id="closeBtn"
+				<div style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto;">
+					<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
+					<p style="padding-top: 5%; text-align: center;">
+						Some countries may not be allowed to use perpetual trading
+						portal - more details available in <a style="color:#640ad7;" href="https://kromatika.finance/terms-of-use" target="_blank">Terms of Use, section 2</a>.
+					</br></br>By clicking "Agree" you accept the Terms and Conditions by
+						Kromatika.Finance
+					</p>
+					<div style="justify-content: center; display:flex;">
+						<input type="checkbox" id="dontShowAgain"/>
+						<p>
+							Don't show this message again for the next 30 days.
+						</p>
+					</div>
+					<div
 						style="
-							background-color: #b7d5d4;
-							border: 0;
-							border-radius: 15px;
-							padding: 15px;
+							display: flex;
+							justify-content: center;
+							padding-bottom: 10px;
 						"
 					>
-						I agree
-					</button>
+						<button
+							id="closeBtn"
+							style="
+								background-color: #b7d5d4;
+								border: 0;
+								border-radius: 15px;
+								padding: 15px;
+							"
+						>
+							I agree
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -115,10 +123,28 @@
 			// Get the button that opens the modal
 			var btn = document.getElementById("closeBtn");
 			var modal = document.getElementById("myModal");
+			var checkbox = document.getElementById("");
 			// When the user clicks on the button, open the modal
 			btn.onclick = function () {
+				//Check if checkbox is ticked
+				if(dontShowAgain.checked)
+				{
+					// Set date of validation to local storage
+					localStorage.setItem('KromApolloxTOUTicked', Date.now().toString())
+				}
 				modal.style.display = "none";
 			};
+			document.addEventListener("DOMContentLoaded", function(event) {
+				//Check for already existing validation 
+				const tickingDate = localStorage.getItem('KromApolloxTOUTicked')
+				const millis = Date.now() - tickingDate
+				console.log(millis)
+				console.log(Math.floor(millis / 1000 / 60 / 60 / 24))
+				if(!tickingDate || (Math.floor(millis / 1000 / 60 / 60 / 24) > 30) )
+				{
+					modal.style.display = "block";
+				}
+			})
 			
 			const { origin, protocol } = window.location;
 			const isDev = protocol === "http:";
