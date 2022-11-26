@@ -138,8 +138,6 @@
 				//Check for already existing validation 
 				const tickingDate = localStorage.getItem('KromApolloxTOUTicked')
 				const millis = Date.now() - tickingDate
-				console.log(millis)
-				console.log(Math.floor(millis / 1000 / 60 / 60 / 24))
 				if(!tickingDate || (Math.floor(millis / 1000 / 60 / 60 / 24) > 30) )
 				{
 					modal.style.display = "block";
