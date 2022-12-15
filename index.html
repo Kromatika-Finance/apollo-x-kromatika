@@ -73,8 +73,6 @@
 		<script src="s3/sdk/sdk.1.8.0.js"></script>
 	</head>
 	<body>
-		<!-- Trigger/Open The Modal -->
-		<!-- <button id="myBtn">Open Modal</button> -->
 
 		<!-- The Modal -->
 		<div id="myModal" class="modal">
@@ -122,7 +120,6 @@
 			// Get the button that opens the modal
 			var btn = document.getElementById("closeBtn");
 			var modal = document.getElementById("myModal");
-			var checkbox = document.getElementById("");
 			// When the user clicks on the button, open the modal
 			btn.onclick = function () {
 				//Check if checkbox is ticked
@@ -153,7 +150,7 @@
 					apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configurate this, it's default as APX's url
 					futuresWsHost: "wss://fstream.apollox.finance/compress",
 					enableThemeToggle: false,
-					
+					supportLanguages: ['en', 'zh-CN'], // optional, default to all languages
 					headerConfig: {
 						disable: false,
 						logo: {
@@ -199,7 +196,6 @@
 			FuturesSDK.eventListener.on('lngChange', (data) => {
 				window.history.pushState({}, null, `/${data.lng}/futures/${getSymbolFromUrl()}`)
 			})
-
 
 			function getLngFromUrl() {
 				return location.pathname.split('/')[1] || 'en'
