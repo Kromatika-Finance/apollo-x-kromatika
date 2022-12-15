@@ -141,7 +141,8 @@
 			})
 			const { origin, protocol, pathname } = window.location;
 			const isDev = protocol === "http:";
-			if (pathname === '/' && !isDev) location.href = "/en/futures/BTCUSDT";
+			// if (pathname === '/' && !isDev)
+			// 	location.href = "/en/futures/BTCUSDT";
 			FuturesSDK.createTradeUI({
 				container: document.getElementById("app"),
 				config: {
