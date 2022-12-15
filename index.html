@@ -70,7 +70,7 @@
 			}
 		</style>
 
-		<script src="s3/sdk/sdk.1.7.4.js"></script>
+		<script src="s3/sdk/sdk.1.8.0.js"></script>
 	</head>
 	<body>
 		<!-- Trigger/Open The Modal -->
@@ -142,9 +142,9 @@
 					modal.style.display = "block";
 				}
 			})
-			
-			const { origin, protocol } = window.location;
+			const { origin, protocol, pathname } = window.location;
 			const isDev = protocol === "http:";
+			if (pathname === '/' && !isDev) location.href = "/en/futures/BTCUSDT";
 			FuturesSDK.createTradeUI({
 				container: document.getElementById("app"),
 				config: {
@@ -153,25 +153,23 @@
 					apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configurate this, it's default as APX's url
 					futuresWsHost: "wss://fstream.apollox.finance/compress",
 					enableThemeToggle: false,
+					
 					headerConfig: {
-						logoUrl: "https://app.kromatika.finance/#/pool",
-						desktopDarkLogoUrl: "/public/kromatika_logo.png",
-						desktopLightLogoUrl: "/public/kromatika_logo.png",
-						mobileLightLogoUrl: "/public/kromatika_logo.png",
-						mobileDarkLogoUrl: "/public/kromatika_logo.png",
-						lpPairAddress:
-							"0x6ae0cdc5d2b89a8dcb99ad6b3435b3e7f7290077",
-						lpBaseAddress:
-							"0x3af33bef05c2dcb3c7288b77fe1c8d2aeba4d789",
-						lpQuoteAddress:
-							"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-						hidePerpetualButtonForDesktop: true,
-						tokenNetwork: "eth",
-						pricePrecision: 8,
-						priceUrl:
-							"https://coinmarketcap.com/currencies/kromatika/",
-						priceLogoUrl:
-							"https://static.coinpaprika.com/coin/krom-kromatikafinance/logo.png?rev=10691015",
+						disable: false,
+						logo: {
+							darkImgUrl: '/public/kromatika_logo.png',
+							lightImgUrl: '/public/kromatika_logo.png',
+							navTo: "https://app.kromatika.finance/#/pool",
+						},
+						token: {
+							imgUrl: `https://static.coinpaprika.com/coin/krom-kromatikafinance/logo.png?rev=10691015`,
+							navTo: 'https://coinmarketcap.com/currencies/kromatika/',
+							lpPairAddress: '0x6ae0cdc5d2b89a8dcb99ad6b3435b3e7f7290077', 
+							lpBaseAddress: '0x3af33bef05c2dcb3c7288b77fe1c8d2aeba4d789', 
+							lpQuoteAddress: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', 
+							network: 'eth',
+							pricePrecision: 8,
+						},
 					},
 					supportNetworks: ["bnb", "eth", "arb"],
 					darkPalette: {
@@ -191,10 +189,26 @@
 					fontUrl: "/public/fonts/Eina02-Regular.ttf",
 				},
 				state: {
-					symbol: "ETHUSDT",
-					lng: "en",
+					symbol: getSymbolFromUrl(),
+					lng: getLngFromUrl(),
 				},
 			});
+			FuturesSDK.eventListener.on('symbolChange', (data) => {
+				window.history.replaceState({}, null, `/${getLngFromUrl()}/futures/${data.symbol}`);
+			})
+			FuturesSDK.eventListener.on('lngChange', (data) => {
+				window.history.pushState({}, null, `/${data.lng}/futures/${getSymbolFromUrl()}`)
+			})
+
+
+			function getLngFromUrl() {
+				return location.pathname.split('/')[1] || 'en'
+			}
+
+			function getSymbolFromUrl() {
+				return location.pathname.split('/')[3] || 'BTCUSDT'
+		}
+      
 		</script>
 	</body>
 </html>
