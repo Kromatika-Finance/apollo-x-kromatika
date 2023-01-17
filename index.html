@@ -141,8 +141,7 @@
 			})
 			const { origin, protocol, pathname } = window.location;
 			const isDev = protocol === "http:";
-			// if (pathname === '/' && !isDev)
-			// 	location.href = "/en/futures/BTCUSDT";
+			
 			FuturesSDK.createTradeUI({
 				container: document.getElementById("app"),
 				config: {
@@ -168,18 +167,15 @@
 							network: 'eth',
 							pricePrecision: 8,
 						},
-						// customerService: {
-						// 	navTo: 'https://apollox.zendesk.com/hc/%lng%/requests/new',
-						// },
+						customerService: {
+							navTo: 'https://apollox.zendesk.com/hc/%lng%/requests/new',
+						},
 					},
 					supportNetworks: ["bnb", "eth", "arb"],
 					darkPalette: {
 						primaryHover: "#7994f6", // background hover
 						primary: "#7994f6", // background; text hover,
-						// sellHover: "#b7d5d4",
-						// sell: "#b7d5d4",
-						// buyHover: "#640ad7",
-						// buy: "#640ad7",
+						
 						badgeYellowBg: "#1E1F31",
 					},
 					loadingImage: {
