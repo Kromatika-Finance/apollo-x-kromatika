@@ -15,8 +15,13 @@ module.exports = {
         {
             from: '/api/(.*)',
             to: 'https://static.apollox.com/api/$1'
+        },
+        {
+            from: '/(.*)/futures/(.*)',
+            to: '/index.html'
         }
     ],
+    spa: 'index.html',
     directory: './',
     logFormat: 'stats'
 }

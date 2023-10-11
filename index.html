@@ -5,122 +5,45 @@
 		<title>Kromatika Perpetual Portal</title>
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-		<style>
-			@font-face {
-				font-family: "Eina-Regular";
-				src: url("/public/fonts/Eina02-Regular.ttf");
-			}
+		<link rel="stylesheet" href="styles/styles.css"/>
 
-			html,
-			body {
-				margin: 0;
-				padding: 0;
-				width: 100vw;
-				height: 100vh;
-			}
-
-			#app {
-				width: 100%;
-				height: 100%;
-				overflow: hidden;
-				color: "white";
-			}
-			/* The Modal (background) */
-			.modal {
-				display: none; /* Hidden by default */
-				position: fixed; /* Stay in place */
-				z-index: 1; /* Sit on top */
-				left: 0;
-				top: 0;
-				background-color: black;
-				width: 100%; /* Full width */
-				height: 100%; /* Full height */
-				overflow: auto; /* Enable scroll if needed */
-				background-color: rgb(0, 0, 0); /* Fallback color */
-				background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-			}
-
-			/* Modal Content/Box */
-			.modal-content {
-				background-color: #222531;
-				margin: 15% auto; /* 15% from the top and centered */
-				padding: 10px;
-				/* border: 1px solid #640ad7	; */
-				width: 40%; /* Could be more or less, depending on screen size */
-				color: white;
-				font-family: "Eina-Regular";
-			}
-
-			@media (pointer: coarse)  {
-				.modal-content {
-					background-color: #222531;
-					margin: 15% auto; 
-					padding: 10px;
-					width: 90%; 
-					color: white;
-					font-family: "Eina-Regular";
-				}	
-			}
-
-			/* The Close Button */
-			#closeBtn:hover {
-				text-decoration: none;
-				cursor: pointer;
-				background-color: #95adac !important;
-			}
-		</style>
-
-		<script src="s3/sdk/sdk.1.7.4.js"></script>
+		<script src="/s3/sdk/sdk.2.0.2.js"></script>
 
 		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ETMQ3J2YW"></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-249910106-4"></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
+			gtag('config', 'UA-249910106-4');
 
-			gtag('config', 'G-1ETMQ3J2YW');
 		</script>
 	</head>
 	<body>
-		<!-- Trigger/Open The Modal -->
-		<!-- <button id="myBtn">Open Modal</button> -->
 
 		<!-- The Modal -->
 		<div id="myModal" class="modal">
 			<!-- Modal content -->
-			<div class="modal-content" style="border-radius: 15px;">
-				<!-- <span class="close">&times;</span> -->
-				<div style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto;">
-					<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
-					<p style="padding-top: 5%; text-align: center;">
+			<div class="modal-content">
+				<div id="modalContent">
+					<p id="modalTitle">Disclaimer</p>
+					<p id="modalSubtitle">
 						Some countries may not be allowed to use perpetual trading
-						portal - more details available in <a style="color:#7994f6;" href="https://kromatika.finance/terms-of-use" target="_blank">Terms of Use, section 2</a>.
+						portal - more details available in <a id="linkTOU" href="https://kromatika.finance/terms-of-use" target="_blank">Terms of Use, section 2</a>.
 					</br></br>By clicking "Agree" you accept the Terms and Conditions by
 						Kromatika.Finance
 					</p>
-					<div style="justify-content: center; display:flex;">
+					<div id="dontShow">
 						<input type="checkbox" id="dontShowAgain"/>
 						<p id="checkboxText">
 							Don't show this message again for the next 30 days.
 						</p>
 					</div>
 					<div
-						style="
-							display: flex;
-							justify-content: center;
-							padding-bottom: 10px;
-						"
+						id="agreeButtonWrapper"
 					>
 						<button
-							id="closeBtn"
-							style="
-								background-color: #b7d5d4;
-								border: 0;
-								border-radius: 15px;
-								padding: 15px;
-							"
-						>
+							id="closeBtn">
 							I agree
 						</button>
 					</div>
@@ -132,7 +55,6 @@
 			// Get the button that opens the modal
 			var btn = document.getElementById("closeBtn");
 			var modal = document.getElementById("myModal");
-			var checkbox = document.getElementById("");
 			// When the user clicks on the button, open the modal
 			btn.onclick = function () {
 				//Check if checkbox is ticked
@@ -143,6 +65,7 @@
 				}
 				modal.style.display = "none";
 			};
+
 			document.addEventListener("DOMContentLoaded", function(event) {
 				//Check for already existing validation 
 				const tickingDate = localStorage.getItem('KromApolloxTOUTicked')
@@ -152,45 +75,49 @@
 					modal.style.display = "block";
 				}
 			})
-			
-			const { origin, protocol } = window.location;
+			const { origin, protocol, pathname } = window.location;
 			const isDev = protocol === "http:";
+			
 			FuturesSDK.createTradeUI({
 				container: document.getElementById("app"),
 				config: {
 					isTestnet: false,
 					staticBaseUrl: `${origin}/s3/static/`, // in production, you have to change this to your static base url
 					apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configurate this, it's default as APX's url
-					futuresWsHost: "wss://fstream.apollox.finance/compress",
+					futuresWsHost: "wss://perp-qa.pancakeswap.finance/plain",
+					sensorsServerHost: 'https://sensors.apollox.cloud/sa?project=default',
 					enableThemeToggle: false,
+					brokerId: 24,
+					palette: {
+						slider: {
+							radioButtonBorderColor: '#FFFFFF',
+						}
+					},
 					headerConfig: {
-						logoUrl: "https://app.kromatika.finance/#/pool",
-						desktopDarkLogoUrl: "/public/kromatika_logo.png",
-						desktopLightLogoUrl: "/public/kromatika_logo.png",
-						mobileLightLogoUrl: "/public/kromatika_logo.png",
-						mobileDarkLogoUrl: "/public/kromatika_logo.png",
-						lpPairAddress:
-							"0x6ae0cdc5d2b89a8dcb99ad6b3435b3e7f7290077",
-						lpBaseAddress:
-							"0x3af33bef05c2dcb3c7288b77fe1c8d2aeba4d789",
-						lpQuoteAddress:
-							"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-						hidePerpetualButtonForDesktop: true,
-						tokenNetwork: "eth",
-						pricePrecision: 8,
-						priceUrl:
-							"https://coinmarketcap.com/currencies/kromatika/",
-						priceLogoUrl:
-							"https://static.coinpaprika.com/coin/krom-kromatikafinance/logo.png?rev=10691015",
+						disable: false,
+						logo: {
+							darkImgUrl: '/public/kromatika_logo.png',
+							lightImgUrl: '/public/kromatika_logo.png',
+							navTo: "https://app.kromatika.finance/#/pool",
+						},
+						token: {
+							imgUrl: `https://static.coinpaprika.com/coin/krom-kromatikafinance/logo.png?rev=10691015`,
+							navTo: 'https://coinmarketcap.com/currencies/kromatika/',
+							lpPairAddress: '0x6ae0cdc5d2b89a8dcb99ad6b3435b3e7f7290077', 
+							lpBaseAddress: '0x3af33bef05c2dcb3c7288b77fe1c8d2aeba4d789', 
+							lpQuoteAddress: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', 
+							network: 'eth',
+							pricePrecision: 8,
+						},
+						customerService: {
+							navTo: 'https://apollox.zendesk.com/hc/%lng%/requests/new',
+						},
 					},
 					supportNetworks: ["bnb", "eth", "arb"],
 					darkPalette: {
 						primaryHover: "#7994f6", // background hover
 						primary: "#7994f6", // background; text hover,
-						// sellHover: "#b7d5d4",
-						// sell: "#b7d5d4",
-						// buyHover: "#640ad7",
-						// buy: "#640ad7",
+						
 						badgeYellowBg: "#1E1F31",
 					},
 					loadingImage: {
@@ -201,10 +128,17 @@
 					fontUrl: "/public/fonts/Eina02-Regular.ttf",
 				},
 				state: {
-					symbol: "ETHUSDT",
-					lng: "en",
+					symbol: 'ETHUSD',
+					lng: 'en',
 				},
 			});
+			FuturesSDK.eventListener.on('symbolChange', (data) => {
+				window.history.replaceState({}, null, `/${getLngFromUrl()}/futures/${data.symbol}`);
+			})
+			FuturesSDK.eventListener.on('lngChange', (data) => {
+				window.history.pushState({}, null, `/${data.lng}/futures/${getSymbolFromUrl()}`)
+			})
+      
 		</script>
 	</body>
 </html>
