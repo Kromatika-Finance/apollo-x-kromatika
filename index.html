@@ -125,14 +125,6 @@
 				modal.style.display = "none";
 			};
 
-			function getLngFromUrl() {
-				return location.pathname.split('/')[1] || 'en'
-			}
-
-			function getSymbolFromUrl() {
-				return location.pathname.split('/')[3] || 'BTCUSDT'
-			}
-
 			document.addEventListener("DOMContentLoaded", function(event) {
 				//Check for already existing validation 
 				const tickingDate = localStorage.getItem('KromApolloxTOUTicked')
