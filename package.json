@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "054940f4d349d0897590.js",
-  "scripts": {
+    "scripts": {
     "start": "ws --port 3333"
   },
   "author": "",

@@ -66,7 +66,7 @@
 			}
 		</style>
 
-		<script src="s3/sdk/sdk.2.0.2.js"></script>
+		<script src="/s3/sdk/sdk.2.0.2.js"></script>
 
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-249910106-4"></script>
@@ -124,6 +124,15 @@
 				}
 				modal.style.display = "none";
 			};
+
+			function getLngFromUrl() {
+				return location.pathname.split('/')[1] || 'en'
+			}
+
+			function getSymbolFromUrl() {
+				return location.pathname.split('/')[3] || 'BTCUSDT'
+			}
+
 			document.addEventListener("DOMContentLoaded", function(event) {
 				//Check for already existing validation 
 				const tickingDate = localStorage.getItem('KromApolloxTOUTicked')
@@ -142,7 +151,8 @@
 					isTestnet: false,
 					staticBaseUrl: `${origin}/s3/static/`, // in production, you have to change this to your static base url
 					apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configurate this, it's default as APX's url
-					futuresWsHost: "wss://fstream.apollox.finance/plain",
+					futuresWsHost: "wss://perp-qa.pancakeswap.finance/plain",
+					sensorsServerHost: 'https://sensors.apollox.cloud/sa?project=default',
 					enableThemeToggle: false,
 					brokerId: 24,
 					palette: {
@@ -185,8 +195,8 @@
 					fontUrl: "/public/fonts/Eina02-Regular.ttf",
 				},
 				state: {
-					symbol: getSymbolFromUrl(),
-					lng: getLngFromUrl(),
+					symbol: 'ETHUSD',
+					lng: 'en',
 				},
 			});
 			FuturesSDK.eventListener.on('symbolChange', (data) => {
@@ -196,13 +206,7 @@
 				window.history.pushState({}, null, `/${data.lng}/futures/${getSymbolFromUrl()}`)
 			})
 
-			function getLngFromUrl() {
-				return location.pathname.split('/')[1] || 'en'
-			}
-
-			function getSymbolFromUrl() {
-				return location.pathname.split('/')[3] || 'BTCUSDT'
-			}
+		
       
 		</script>
 	</body>
