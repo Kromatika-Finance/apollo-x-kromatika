@@ -1,18 +1,4 @@
-### Mock whitelist API
-
-For development, you have to mock the whitelist API with [ajax interceptor extension](https://chrome.google.com/webstore/detail/ajax-interceptor/nhpjggchkhnlbgdfcbgpdpkifemomkpg), the response should be
-
-```json
-{
-  "code": "000000",
-  "message": null,
-  "messageDetail": null,
-  "data": { "sourceCode": "" },
-  "success": true
-}
-```
-
-![ajax-inteceptor](../../docs/images/ajax-interceptor.png)
+Please refer to https://github.com/apollox-broker/apollox-broker-web-sdk#configs
 
 ### Run the example
 

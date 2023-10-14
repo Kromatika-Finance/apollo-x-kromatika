@@ -1,77 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html style="background-color: #121221;">
 	<head>
 		<meta charset="utf-8" />
 		<title>Kromatika Perpetual Portal</title>
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-		<style>
-			@font-face {
-				font-family: "Eina-Regular";
-				src: url("/public/fonts/Eina02-Regular.ttf");
-			}
-
-			html,
-			body {
-				margin: 0;
-				padding: 0;
-				width: 100vw;
-				height: 100vh;
-			}
-
-			#app {
-				width: 100%;
-				height: 100%;
-				overflow: hidden;
-				color: "white";
-			}
-			/* The Modal (background) */
-			.modal {
-				display: none; /* Hidden by default */
-				position: fixed; /* Stay in place */
-				z-index: 1; /* Sit on top */
-				left: 0;
-				top: 0;
-				background-color: black;
-				width: 100%; /* Full width */
-				height: 100%; /* Full height */
-				overflow: auto; /* Enable scroll if needed */
-				background-color: rgb(0, 0, 0); /* Fallback color */
-				background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-			}
-
-			/* Modal Content/Box */
-			.modal-content {
-				background-color: #222531;
-				margin: 15% auto; /* 15% from the top and centered */
-				padding: 10px;
-				/* border: 1px solid #640ad7	; */
-				width: 40%; /* Could be more or less, depending on screen size */
-				color: white;
-				font-family: "Eina-Regular";
-			}
-
-			@media (pointer: coarse)  {
-				.modal-content {
-					background-color: #222531;
-					margin: 15% auto; 
-					padding: 10px;
-					width: 90%; 
-					color: white;
-					font-family: "Eina-Regular";
-				}	
-			}
-
-			/* The Close Button */
-			#closeBtn:hover {
-				text-decoration: none;
-				cursor: pointer;
-				background-color: #95adac !important;
-			}
-		</style>
-
-		<script src="s3/sdk/sdk.1.7.4.js"></script>
-
+		<link rel="stylesheet" href="styles/styles.css"/>
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ETMQ3J2YW"></script>
 		<script>
@@ -83,11 +17,7 @@
 		</script>
 	</head>
 	<body>
-		<!-- Trigger/Open The Modal -->
-		<!-- <button id="myBtn">Open Modal</button> -->
-
-		<!-- The Modal -->
-		<div id="myModal" class="modal">
+		<div id="cookieModal" class="modal">
 			<!-- Modal content -->
 			<div class="modal-content" style="border-radius: 15px;">
 				<!-- <span class="close">&times;</span> -->
@@ -127,21 +57,74 @@
 				</div>
 			</div>
 		</div>
+		<div id="versionModal" class="modal" style="display: none;">
+			<!-- Modal content -->
+			<div class="modal-content" style="border-radius: 15px;">
+				<!-- <span class="close">&times;</span> -->
+				<div style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto;">
+					<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
+					<p style="padding-top: 5%; text-align: center;">
+						There is now two versions of the perpetual platform.
+					</br></br>Please select the version you want to use
+					</p>
+					<div style="justify-content: center; display:flex;">
+						<button
+							id="versionBtn"
+							style="
+								background-color: #b7d5d4;
+								border: 0;
+								border-radius: 15px;
+								padding: 15px;
+								margin-right: 15px;
+								cursor: pointer;
+							"
+							href="/v1.html"
+						>
+							Version 1
+						</button>
+						<button
+							id="versionBtn2"
+							style="
+								background-color: #b7d5d4;
+								border: 0;
+								border-radius: 15px;
+								padding: 15px;
+								cursor: pointer;
+							"
+						>
+							Version 2
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div id="app"></div>
 		<script>
 			// Get the button that opens the modal
-			var btn = document.getElementById("closeBtn");
-			var modal = document.getElementById("myModal");
-			var checkbox = document.getElementById("");
+			var cookieBtn = document.getElementById("closeBtn");
+			var versionBtn = document.getElementById("versionBtn");
+			var versionBtn2 = document.getElementById("versionBtn2");
+			var cookieModal = document.getElementById("cookieModal");
+			var versionModal = document.getElementById("versionModal")
 			// When the user clicks on the button, open the modal
-			btn.onclick = function () {
+			cookieBtn.onclick = function () {
 				//Check if checkbox is ticked
 				if(dontShowAgain.checked)
 				{
 					// Set date of validation to local storage
 					localStorage.setItem('KromApolloxTOUTicked', Date.now().toString())
 				}
-				modal.style.display = "none";
+				cookieModal.style.display = "none";
+				versionModal.style.display = "block";
+			};
+
+			versionBtn.onclick = function () {
+				versionModal.style.display = "none";
+				window.location = '/v1.html'
+			};
+			versionBtn2.onclick = function () {
+				versionModal.style.display = "none";
+				window.location = '/v2.html'
 			};
 			document.addEventListener("DOMContentLoaded", function(event) {
 				//Check for already existing validation 
@@ -149,62 +132,9 @@
 				const millis = Date.now() - tickingDate
 				if(!tickingDate || (Math.floor(millis / 1000 / 60 / 60 / 24) > 30) )
 				{
-					modal.style.display = "block";
+					cookieModal.style.display = "block";
 				}
 			})
-			
-			const { origin, protocol } = window.location;
-			const isDev = protocol === "http:";
-			FuturesSDK.createTradeUI({
-				container: document.getElementById("app"),
-				config: {
-					isTestnet: false,
-					staticBaseUrl: `${origin}/s3/static/`, // in production, you have to change this to your static base url
-					apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configurate this, it's default as APX's url
-					futuresWsHost: "wss://fstream.apollox.finance/compress",
-					enableThemeToggle: false,
-					headerConfig: {
-						logoUrl: "https://app.kromatika.finance/#/pool",
-						desktopDarkLogoUrl: "/public/kromatika_logo.png",
-						desktopLightLogoUrl: "/public/kromatika_logo.png",
-						mobileLightLogoUrl: "/public/kromatika_logo.png",
-						mobileDarkLogoUrl: "/public/kromatika_logo.png",
-						lpPairAddress:
-							"0x6ae0cdc5d2b89a8dcb99ad6b3435b3e7f7290077",
-						lpBaseAddress:
-							"0x3af33bef05c2dcb3c7288b77fe1c8d2aeba4d789",
-						lpQuoteAddress:
-							"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-						hidePerpetualButtonForDesktop: true,
-						tokenNetwork: "eth",
-						pricePrecision: 8,
-						priceUrl:
-							"https://coinmarketcap.com/currencies/kromatika/",
-						priceLogoUrl:
-							"https://static.coinpaprika.com/coin/krom-kromatikafinance/logo.png?rev=10691015",
-					},
-					supportNetworks: ["bnb", "eth", "arb"],
-					darkPalette: {
-						primaryHover: "#7994f6", // background hover
-						primary: "#7994f6", // background; text hover,
-						// sellHover: "#b7d5d4",
-						// sell: "#b7d5d4",
-						// buyHover: "#640ad7",
-						// buy: "#640ad7",
-						badgeYellowBg: "#1E1F31",
-					},
-					loadingImage: {
-						url: "/public/loading.gif",
-					},
-					defaultTheme: "dark",
-					fontFamily: "Eina-Regular",
-					fontUrl: "/public/fonts/Eina02-Regular.ttf",
-				},
-				state: {
-					symbol: "ETHUSDT",
-					lng: "en",
-				},
-			});
 		</script>
 	</body>
 </html>
