@@ -1,140 +1,140 @@
 <!DOCTYPE html>
 <html style="background-color: #121221;">
-	<head>
-		<meta charset="utf-8" />
-		<title>Kromatika Perpetual Portal</title>
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-		<link rel="stylesheet" href="styles/styles.css"/>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ETMQ3J2YW"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'G-1ETMQ3J2YW');
-		</script>
-	</head>
-	<body>
-		<div id="cookieModal" class="modal">
-			<!-- Modal content -->
-			<div class="modal-content" style="border-radius: 15px;">
-				<div style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto; padding-bottom: 5%;">
-					<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
-					<p style="padding-top: 5%; text-align: center;">
-						Some countries may not be allowed to use perpetual trading
-						portal - more details available in <a style="color:#7994f6;" href="https://kromatika.finance/terms-of-use" target="_blank">Terms of Use, section 2</a>.
+
+<head>
+	<meta charset="utf-8" />
+	<title>Kromatika Perpetual Portal</title>
+	<meta name="viewport" content="width=device-width" />
+	<link rel="icon" type="image/x-icon" href="favicon.ico" />
+	<link rel="stylesheet" href="styles/styles.css" />
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ETMQ3J2YW"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+		gtag('config', 'G-1ETMQ3J2YW');
+	</script>
+</head>
+
+<body>
+	<div id="cookieModal" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content" style="border-radius: 15px;">
+			<div
+				style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto; padding-bottom: 5%;">
+				<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
+				<p style="padding-top: 5%; text-align: center;">
+					Some countries may not be allowed to use perpetual trading
+					portal - more details available in <a style="color:#7994f6;"
+						href="https://kromatika.finance/terms-of-use" target="_blank">Terms of Use, section 2</a>.
 					</br></br>By clicking "Agree" you accept the Terms and Conditions by
-						Kromatika.Finance
+					Kromatika.Finance
+				</p>
+				<div style="justify-content: center; display:flex;">
+					<input type="checkbox" id="dontShowAgain" />
+					<p id="checkboxText">
+						Don't show this message again for the next 30 days.
 					</p>
-					<div style="justify-content: center; display:flex;">
-						<input type="checkbox" id="dontShowAgain"/>
-						<p id="checkboxText">
-							Don't show this message again for the next 30 days.
-						</p>
-					</div>
-					<div
-						style="
+				</div>
+				<div style="
 							display: flex;
 							justify-content: center;
 							padding-bottom: 10px;
 							padding-top: 5%;
-						"
-					>
-						<button
-							id="closeBtn"
-							style="
+						">
+					<button id="closeBtn" style="
 								background-color: #b7d5d4;
 								border: 0;
 								border-radius: 15px;
 								padding: 15px;
 								padding-left: 50px;
 								padding-right: 50px;
-							"
-						>
-							I agree
-						</button>
-					</div>
+							">
+						I agree
+					</button>
 				</div>
 			</div>
 		</div>
-		<div id="versionModal" class="modal" style="display: none;">
-			<!-- Modal content -->
-			<div class="modal-content" style="border-radius: 15px;">
-				<div style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto;">
-					<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
-					<p style="padding-top: 5%; text-align: center;">
-						There are now two versions of the perpetual platform.
-					</br></br>Please choose the version you want to use :
-					</p>
-					<div style="justify-content: center; display:flex; padding-top: 5%; padding-bottom: 5%;">
-						<button
-							id="versionBtn"
-							style="
+	</div>
+	<div id="versionModal" class="modal" style="display: none;">
+		<!-- Modal content -->
+		<div class="modal-content" style="border-radius: 15px;">
+			<div style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto;">
+				<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
+				<p style="padding-top: 5%; text-align: center;">
+					There are now two versions of the perpetual platform.
+					</br></br>Please choose the version you want to use
+				</p>
+				<ul
+					style="display: flex; flex-direction: column; padding: 5% 0% 0% 0%; font-weight: bold; text-align: center; list-style: none;">
+					<li>
+						Version 1: Orderbook perpetuals with over 72 pairs
+					</li>
+					<li>
+						Version 2: On-chain perpetuals with 500x lev and Forex
+					</li>
+				</ul>
+				<div style="justify-content: center; display:flex; padding-top: 5%; padding-bottom: 5%;">
+					<button id="versionBtn" style="
 								background-color: #b7d5d4;
 								border: 0;
 								border-radius: 15px;
 								padding: 15px;
 								margin-right: 15px;
 								cursor: pointer;
-							"
-							href="/v1.html"
-						>
-							Version 1
-						</button>
-						<button
-							id="versionBtn2"
-							style="
+							" href="/v1.html">
+						Version 1
+					</button>
+					<button id="versionBtn2" style="
 								background-color: #b7d5d4;
 								border: 0;
 								border-radius: 15px;
 								padding: 15px;
 								cursor: pointer;
-							"
-						>
-							Version 2
-						</button>
-					</div>
+							">
+						Version 2
+					</button>
 				</div>
 			</div>
 		</div>
-		<div id="app"></div>
-		<script>
-			// Get the button that opens the modal
-			var cookieBtn = document.getElementById("closeBtn");
-			var versionBtn = document.getElementById("versionBtn");
-			var versionBtn2 = document.getElementById("versionBtn2");
-			var cookieModal = document.getElementById("cookieModal");
-			var versionModal = document.getElementById("versionModal")
-			// When the user clicks on the button, open the modal
-			cookieBtn.onclick = function () {
-				//Check if checkbox is ticked
-				if(dontShowAgain.checked)
-				{
-					// Set date of validation to local storage
-					localStorage.setItem('KromApolloxTOUTicked', Date.now().toString())
-				}
-				cookieModal.style.display = "none";
-				versionModal.style.display = "block";
-			};
+	</div>
+	<div id="app"></div>
+	<script>
+		// Get the button that opens the modal
+		var cookieBtn = document.getElementById("closeBtn");
+		var versionBtn = document.getElementById("versionBtn");
+		var versionBtn2 = document.getElementById("versionBtn2");
+		var cookieModal = document.getElementById("cookieModal");
+		var versionModal = document.getElementById("versionModal")
+		// When the user clicks on the button, open the modal
+		cookieBtn.onclick = function () {
+			//Check if checkbox is ticked
+			if (dontShowAgain.checked) {
+				// Set date of validation to local storage
+				localStorage.setItem('KromApolloxTOUTicked', Date.now().toString())
+			}
+			cookieModal.style.display = "none";
+			versionModal.style.display = "block";
+		};
 
-			versionBtn.onclick = function () {
-				versionModal.style.display = "none";
-				window.location = '/v1.html'
-			};
-			versionBtn2.onclick = function () {
-				versionModal.style.display = "none";
-				window.location = '/v2.html'
-			};
-			document.addEventListener("DOMContentLoaded", function(event) {
-				//Check for already existing validation 
-				const tickingDate = localStorage.getItem('KromApolloxTOUTicked')
-				const millis = Date.now() - tickingDate
-				if(!tickingDate || (Math.floor(millis / 1000 / 60 / 60 / 24) > 30) )
-				{
-					cookieModal.style.display = "block";
-				}
-			})
-		</script>
-	</body>
+		versionBtn.onclick = function () {
+			versionModal.style.display = "none";
+			window.location = '/v1.html'
+		};
+		versionBtn2.onclick = function () {
+			versionModal.style.display = "none";
+			window.location = '/v2.html'
+		};
+		document.addEventListener("DOMContentLoaded", function (event) {
+			//Check for already existing validation 
+			const tickingDate = localStorage.getItem('KromApolloxTOUTicked')
+			const millis = Date.now() - tickingDate
+			if (!tickingDate || (Math.floor(millis / 1000 / 60 / 60 / 24) > 30)) {
+				cookieModal.style.display = "block";
+			}
+		})
+	</script>
+</body>
+
 </html>
