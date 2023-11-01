@@ -31,17 +31,17 @@
 					</br></br>By clicking "Agree" you accept the Terms and Conditions by
 					Kromatika.Finance
 				</p>
-				<div style="justify-content: center; display:flex;">
-					<input type="checkbox" id="dontShowAgain" />
+				<div style="justify-content: center; display:flex; flex-direction: column;">
 					<p id="checkboxText">
 						Don't show this message again for the next 30 days.
 					</p>
+					<input type="checkbox" id="dontShowAgain" />
 				</div>
 				<div style="
 							display: flex;
 							justify-content: center;
 							padding-bottom: 10px;
-							padding-top: 5%;
+							padding-top: 20px;
 						">
 					<button id="closeBtn" style="
 								background-color: #b7d5d4;
@@ -132,6 +132,8 @@
 			const millis = Date.now() - tickingDate
 			if (!tickingDate || (Math.floor(millis / 1000 / 60 / 60 / 24) > 30)) {
 				cookieModal.style.display = "block";
+			} else {
+				versionModal.style.display = "block";
 			}
 		})
 	</script>
