@@ -91,9 +91,19 @@
 								border: 0;
 								border-radius: 15px;
 								padding: 15px;
+								margin-right: 15px;
 								cursor: pointer;
 							">
 						Version 2
+					</button>
+					<button id="versionBtn3" style="
+								background-color: #b7d5d4;
+								border: 0;
+								border-radius: 15px;
+								padding: 15px;
+								cursor: pointer;
+							">
+						Version 3
 					</button>
 				</div>
 			</div>
@@ -105,6 +115,7 @@
 		var cookieBtn = document.getElementById("closeBtn");
 		var versionBtn = document.getElementById("versionBtn");
 		var versionBtn2 = document.getElementById("versionBtn2");
+		var versionBtn3 = document.getElementById("versionBtn3");
 		var cookieModal = document.getElementById("cookieModal");
 		var versionModal = document.getElementById("versionModal")
 		// When the user clicks on the button, open the modal
@@ -126,6 +137,11 @@
 			versionModal.style.display = "none";
 			window.location = '/v2.html'
 		};
+		versionBtn3.onclick = function () {
+			versionModal.style.display = "none";
+			window.location = '/v3.html'
+		};
+		
 		document.addEventListener("DOMContentLoaded", function (event) {
 			//Check for already existing validation 
 			const tickingDate = localStorage.getItem('KromApolloxTOUTicked')

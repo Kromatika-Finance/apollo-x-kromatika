@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Kromatika Perpetual Portal v3</title>
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+		<link rel="stylesheet" href="styles/styles.css"/>
+
+		<script src="/s3/v3/sdk/sdk.3.0.1.js"></script>
+
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ETMQ3J2YW"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-1ETMQ3J2YW');
+		</script>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script>
+			const { origin, protocol, pathname } = window.location;
+			const isDev = protocol === "http:";
+			FuturesSDK.createTradeUI({
+				container: document.getElementById("app"),
+				config: {
+					isTestnet: false,
+					staticBaseUrl: `${origin}/s3/v3/static/`, // in production, you have to change this to your static base url
+					apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configurate this, it's default as APX's url
+					graphqlTemplateUrl: 'https://api.thegraph.com/subgraphs/name/apollx-apx/apollox-perp-{{network}}',  // graphql template url
+					futuresWsHost: "wss://fstream.apollox.finance/plain",
+					sensorsServerHost: 'https://sensors.apollox.cloud/sa?project=default',
+					enableThemeToggle: false,
+					brokerId: 32,
+					palette: {
+						slider: {
+							radioButtonBorderColor: '#FFFFFF',
+						}
+					},
+					features: {
+						referral: {
+							enabled: true
+						}
+					},
+					headerConfig: {
+						disable: false,
+						logo: {
+							darkImgUrl: '/public/kromatika_logo.png',
+							lightImgUrl: '/public/kromatika_logo.png',
+							navTo: "https://app.kromatika.finance/#/pool",
+						},
+						token: {
+							// imgUrl: `https://static.coinpaprika.com/coin/krom-kromatikafinance/logo.png?rev=10691015`,
+							navTo: 'https://coinmarketcap.com/currencies/kromatika/',
+							lpPairAddress: '0x6ae0cdc5d2b89a8dcb99ad6b3435b3e7f7290077', 
+							lpBaseAddress: '0x3af33bef05c2dcb3c7288b77fe1c8d2aeba4d789', 
+							lpQuoteAddress: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', 
+							network: 'eth',
+							pricePrecision: 8,
+						},
+						customerService: {
+							navTo: 'https://apollox.zendesk.com/hc/%lng%/requests/new',
+						},
+					},
+					// supportNetworks: ["bnb", "eth", "arb"],
+					// darkPalette: {
+					// 	primaryHover: "#7994f6", // background hover
+					// 	primary: "#7994f6", // background; text hover,
+						
+					// 	badgeYellowBg: "#1E1F31",
+					// },
+					loadingImage: {
+						url: "/public/loading.gif",
+					},
+					defaultTheme: "dark",
+					fontFamily: "Eina-Regular",
+					fontUrl: "/public/fonts/Eina02-Regular.ttf",
+				},
+				state: {
+					symbol: "ETHUSD",
+					lng: "en",
+				},
+			});
+			FuturesSDK.eventListener.on('symbolChange', (data) => {
+				console.log('symbol change', data.symbol)
+				window.history.replaceState({}, null, data.symbol);
+        	})
+			// For debug purposes
+        	// FuturesSDK.eventListener.on('startLoad', () =>  console.log('startLoad event received'))
+		</script>
+	</body>
+</html>
