@@ -31,11 +31,12 @@
 					</br></br>By clicking "Agree" you accept the Terms and Conditions by
 					Kromatika.Finance
 				</p>
-				<div style="justify-content: center; display:flex; flex-direction: column;">
-					<p id="checkboxText">
-						Don't show this message again for the next 30 days.
-					</p>
-					<input type="checkbox" id="dontShowAgain" />
+				<div style="justify-content: center; display:flex;">
+						<input type="checkbox" id="dontShowAgain" />
+						<p id="checkboxText">
+							Don't show this message again for the next 30 days.
+						</p>
+					
 				</div>
 				<div style="
 							display: flex;
@@ -63,7 +64,7 @@
 			<div style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto;">
 				<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
 				<p style="padding-top: 5%; text-align: center;">
-					There are now two versions of the perpetual platform.
+					There are now 3 versions of the perpetual platform.
 					</br></br>Please choose the version you want to use
 				</p>
 				<ul
@@ -73,6 +74,9 @@
 					</li>
 					<li>
 						Version 2: On-chain perpetuals with 500x lev and Forex
+					</li>
+					<li>
+						Version 3: ???
 					</li>
 				</ul>
 				<div style="justify-content: center; display:flex; padding-top: 5%; padding-bottom: 5%;">
@@ -91,9 +95,19 @@
 								border: 0;
 								border-radius: 15px;
 								padding: 15px;
+								margin-right: 15px;
 								cursor: pointer;
 							">
 						Version 2
+					</button>
+					<button id="versionBtn3" style="
+								background-color: #b7d5d4;
+								border: 0;
+								border-radius: 15px;
+								padding: 15px;
+								cursor: pointer;
+							">
+						Version 3
 					</button>
 				</div>
 			</div>
@@ -105,6 +119,7 @@
 		var cookieBtn = document.getElementById("closeBtn");
 		var versionBtn = document.getElementById("versionBtn");
 		var versionBtn2 = document.getElementById("versionBtn2");
+		var versionBtn3 = document.getElementById("versionBtn3");
 		var cookieModal = document.getElementById("cookieModal");
 		var versionModal = document.getElementById("versionModal")
 		// When the user clicks on the button, open the modal
@@ -126,6 +141,11 @@
 			versionModal.style.display = "none";
 			window.location = '/v2.html'
 		};
+		versionBtn3.onclick = function () {
+			versionModal.style.display = "none";
+			window.location = '/v3.html'
+		};
+		
 		document.addEventListener("DOMContentLoaded", function (event) {
 			//Check for already existing validation 
 			const tickingDate = localStorage.getItem('KromApolloxTOUTicked')

@@ -1,13 +1,13 @@
-Please refer to https://github.com/apollox-broker/apollox-broker-web-sdk#configs
+Please refer to https://github.com/apollox-finance/broker-web-sdk#configs
 
 ### Run the example
 
-Please download the latest sdk in https://github.com/apollox-broker/apollox-broker-web-sdk/releases
+Please download the latest sdk in https://github.com/apollox-finance/broker-web-sdk/releases
 ![download-link](../../docs/images/download-link.png)
 
 ```sh
-git clone https://github.com/apollox-broker/apollox-broker-web-sdk.git
-cd apollox-broker-web-sdk/examples/basic
+git clone https://github.com/apollox-finance/broker-web-sdk.git
+cd broker-web-sdk/examples/basic
 unzip cloud_sdk.{version}.zip -d s3 # please ensure you have download the SDK zip file
 yarn
 yarn start
