@@ -31,12 +31,11 @@
 					</br></br>By clicking "Agree" you accept the Terms and Conditions by
 					Kromatika.Finance
 				</p>
-				<div style="justify-content: center; display:flex;">
-						<input type="checkbox" id="dontShowAgain" />
-						<p id="checkboxText">
-							Don't show this message again for the next 30 days.
-						</p>
-					
+				<div style="justify-content: center; display:flex; flex-direction: column;">
+					<p id="checkboxText">
+						Don't show this message again for the next 30 days.
+					</p>
+					<input type="checkbox" id="dontShowAgain" />
 				</div>
 				<div style="
 							display: flex;
@@ -73,10 +72,7 @@
 						Version 1: Orderbook perpetuals with over 72 pairs
 					</li>
 					<li>
-						Version 2: On-chain perpetuals with 500x lev and Forex
-					</li>
-					<li>
-						Version 3: ???
+						Version 2: On-chain perpetuals with 1001x lev on (Arbitrum, BNB, opBNB, Base)
 					</li>
 				</ul>
 				<div style="justify-content: center; display:flex; padding-top: 5%; padding-bottom: 5%;">
@@ -99,15 +95,6 @@
 								cursor: pointer;
 							">
 						Version 2
-					</button>
-					<button id="versionBtn3" style="
-								background-color: #b7d5d4;
-								border: 0;
-								border-radius: 15px;
-								padding: 15px;
-								cursor: pointer;
-							">
-						Version 3
 					</button>
 				</div>
 			</div>
@@ -140,10 +127,6 @@
 		versionBtn2.onclick = function () {
 			versionModal.style.display = "none";
 			window.location = '/v2.html'
-		};
-		versionBtn3.onclick = function () {
-			versionModal.style.display = "none";
-			window.location = '/v3.html'
 		};
 		
 		document.addEventListener("DOMContentLoaded", function (event) {
