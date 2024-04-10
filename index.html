@@ -63,7 +63,7 @@
 			<div style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto;">
 				<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
 				<p style="padding-top: 5%; text-align: center;">
-					There are now two versions of the perpetual platform.
+					There are now 3 versions of the perpetual platform.
 					</br></br>Please choose the version you want to use
 				</p>
 				<ul
@@ -72,7 +72,7 @@
 						Version 1: Orderbook perpetuals with over 72 pairs
 					</li>
 					<li>
-						Version 2: On-chain perpetuals with 500x lev and Forex
+						Version 2: On-chain perpetuals with 1001x lev on (Arbitrum, BNB, opBNB, Base)
 					</li>
 				</ul>
 				<div style="justify-content: center; display:flex; padding-top: 5%; padding-bottom: 5%;">
@@ -91,6 +91,7 @@
 								border: 0;
 								border-radius: 15px;
 								padding: 15px;
+								margin-right: 15px;
 								cursor: pointer;
 							">
 						Version 2
@@ -105,6 +106,7 @@
 		var cookieBtn = document.getElementById("closeBtn");
 		var versionBtn = document.getElementById("versionBtn");
 		var versionBtn2 = document.getElementById("versionBtn2");
+		var versionBtn3 = document.getElementById("versionBtn3");
 		var cookieModal = document.getElementById("cookieModal");
 		var versionModal = document.getElementById("versionModal")
 		// When the user clicks on the button, open the modal
@@ -126,6 +128,7 @@
 			versionModal.style.display = "none";
 			window.location = '/v2.html'
 		};
+		
 		document.addEventListener("DOMContentLoaded", function (event) {
 			//Check for already existing validation 
 			const tickingDate = localStorage.getItem('KromApolloxTOUTicked')

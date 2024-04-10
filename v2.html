@@ -7,7 +7,7 @@
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
 		<link rel="stylesheet" href="styles/styles.css"/>
 
-		<script src="/s3/v2/sdk/sdk.2.0.2.js"></script>
+		<script src="/s3/v3/sdk/sdk.3.0.2.js"></script>
 
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ETMQ3J2YW"></script>
@@ -23,13 +23,13 @@
 		<script>
 			const { origin, protocol, pathname } = window.location;
 			const isDev = protocol === "http:";
-			
 			FuturesSDK.createTradeUI({
 				container: document.getElementById("app"),
 				config: {
 					isTestnet: false,
-					staticBaseUrl: `${origin}/s3/v2/static/`, // in production, you have to change this to your static base url
+					staticBaseUrl: `${origin}/s3/v3/static/`, // in production, you have to change this to your static base url
 					apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configurate this, it's default as APX's url
+					graphqlTemplateUrl: 'https://api.thegraph.com/subgraphs/name/apollx-apx/apollox-perp-{{network}}',  // graphql template url
 					futuresWsHost: "wss://fstream.apollox.finance/plain",
 					sensorsServerHost: 'https://sensors.apollox.cloud/sa?project=default',
 					enableThemeToggle: false,
@@ -52,6 +52,7 @@
 							navTo: "https://app.kromatika.finance/#/pool",
 						},
 						token: {
+							// This line makes the header buggy because logo is not displayed properly
 							imgUrl: `https://static.coinpaprika.com/coin/krom-kromatikafinance/logo.png?rev=10691015`,
 							navTo: 'https://coinmarketcap.com/currencies/kromatika/',
 							lpPairAddress: '0x6ae0cdc5d2b89a8dcb99ad6b3435b3e7f7290077', 
@@ -60,17 +61,21 @@
 							network: 'eth',
 							pricePrecision: 8,
 						},
+						menu: {
+							data: [],
+							placement: "left",
+						},
 						customerService: {
-							navTo: 'https://apollox.zendesk.com/hc/%lng%/requests/new',
+							navTo: 'https://medium.com/apx-finance/apollox-will-be-migrating-customer-support-to-discord-6a89846d67f6',
 						},
 					},
-					supportNetworks: ["bnb", "eth", "arb"],
-					darkPalette: {
-						primaryHover: "#7994f6", // background hover
-						primary: "#7994f6", // background; text hover,
+					supportNetworks: ["bnb", "arb", "opbnb", "base"],
+					// darkPalette: {
+					// 	primaryHover: "#7994f6", // background hover
+					// 	primary: "#7994f6", // background; text hover,
 						
-						badgeYellowBg: "#1E1F31",
-					},
+					// 	badgeYellowBg: "#1E1F31",
+					// },
 					loadingImage: {
 						url: "/public/loading.gif",
 					},
@@ -87,7 +92,8 @@
 				console.log('symbol change', data.symbol)
 				window.history.replaceState({}, null, data.symbol);
         	})
-        	FuturesSDK.eventListener.on('startLoad', () =>  console.log('startLoad event received'))
+			// For debug purposes
+        	// FuturesSDK.eventListener.on('startLoad', () =>  console.log('startLoad event received'))
 		</script>
 	</body>
 </html>
