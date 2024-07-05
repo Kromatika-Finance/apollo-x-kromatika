@@ -2,15 +2,18 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>Kromatika Perpetual Portal v2</title>
+		<title>Kromatika Perpetual Portal v4</title>
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-		<link rel="stylesheet" href="styles/styles.css"/>
+		<link rel="stylesheet" href="styles/styles.css" />
 
-		<script src="/s3/v3/sdk/sdk.3.0.2.js"></script>
+		<script src="/s3/v4/sdk/sdk.4.0.2.js"></script>
 
 		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ETMQ3J2YW"></script>
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-1ETMQ3J2YW"
+		></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
@@ -27,7 +30,7 @@
 				container: document.getElementById("app"),
 				config: {
 					isTestnet: false,
-					staticBaseUrl: `${origin}/s3/v3/static/`, // in production, you have to change this to your static base url
+					staticBaseUrl: `${origin}/s3/v4/static/`, // in production, you have to change this to your static base url
 					apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configurate this, it's default as APX's url
 					graphqlTemplateUrl: 'https://api.thegraph.com/subgraphs/name/apollx-apx/apollox-perp-{{network}}',  // graphql template url
 					futuresWsHost: "wss://fstream.apollox.finance/plain",
@@ -55,9 +58,9 @@
 							// This line makes the header buggy because logo is not displayed properly
 							imgUrl: `https://static.coinpaprika.com/coin/krom-kromatikafinance/logo.png?rev=10691015`,
 							navTo: 'https://coinmarketcap.com/currencies/kromatika/',
-							lpPairAddress: '0x6ae0cdc5d2b89a8dcb99ad6b3435b3e7f7290077', 
-							lpBaseAddress: '0x3af33bef05c2dcb3c7288b77fe1c8d2aeba4d789', 
-							lpQuoteAddress: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', 
+							lpPairAddress: '0x6ae0cdc5d2b89a8dcb99ad6b3435b3e7f7290077',
+							lpBaseAddress: '0x3af33bef05c2dcb3c7288b77fe1c8d2aeba4d789',
+							lpQuoteAddress: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
 							network: 'eth',
 							pricePrecision: 8,
 						},
@@ -73,7 +76,7 @@
 					// darkPalette: {
 					// 	primaryHover: "#7994f6", // background hover
 					// 	primary: "#7994f6", // background; text hover,
-						
+
 					// 	badgeYellowBg: "#1E1F31",
 					// },
 					loadingImage: {
@@ -91,9 +94,9 @@
 			FuturesSDK.eventListener.on('symbolChange', (data) => {
 				console.log('symbol change', data.symbol)
 				window.history.replaceState({}, null, data.symbol);
-        	})
+			     	})
 			// For debug purposes
-        	// FuturesSDK.eventListener.on('startLoad', () =>  console.log('startLoad event received'))
+			     	// FuturesSDK.eventListener.on('startLoad', () =>  console.log('startLoad event received'))
 		</script>
 	</body>
 </html>
