@@ -1,145 +1,164 @@
 <!DOCTYPE html>
-<html style="background-color: #121221;">
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Kromatika Perpetual Portal v4</title>
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+		<link rel="stylesheet" href="styles/styles.css" />
 
-<head>
-	<meta charset="utf-8" />
-	<title>Kromatika Perpetual Portal</title>
-	<meta name="viewport" content="width=device-width" />
-	<link rel="icon" type="image/x-icon" href="favicon.ico" />
-	<link rel="stylesheet" href="styles/styles.css" />
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-1ETMQ3J2YW"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
-		gtag('config', 'G-1ETMQ3J2YW');
-	</script>
-</head>
+		<script src="/s3/v4/sdk/sdk.4.0.2.js"></script>
 
-<body>
-	<div id="cookieModal" class="modal">
-		<!-- Modal content -->
-		<div class="modal-content" style="border-radius: 15px;">
-			<div
-				style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto; padding-bottom: 5%;">
-				<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
-				<p style="padding-top: 5%; text-align: center;">
-					Some countries may not be allowed to use perpetual trading
-					portal - more details available in <a style="color:#7994f6;"
-						href="https://kromatika.finance/terms-of-use" target="_blank">Terms of Use, section 2</a>.
-					</br></br>By clicking "Agree" you accept the Terms and Conditions by
-					Kromatika.Finance
-				</p>
-				<div style="justify-content: center; display:flex; flex-direction: column;">
-					<p id="checkboxText">
-						Don't show this message again for the next 30 days.
+		<!-- Google tag (gtag.js) -->
+		<script
+			async
+			src="https://www.googletagmanager.com/gtag/js?id=G-1ETMQ3J2YW"
+		></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-1ETMQ3J2YW');
+		</script>
+	</head>
+	<body>
+		<div id="cookieModal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content" style="border-radius: 15px;">
+				<div
+					style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto; padding-bottom: 5%;">
+					<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
+					<p style="padding-top: 5%; text-align: center;">
+						Some countries may not be allowed to use perpetual trading
+						portal - more details available in <a style="color:#7994f6;"
+							href="https://kromatika.finance/terms-of-use" target="_blank">Terms of Use, section 2</a>.
+						</br></br>By clicking "Agree" you accept the Terms and Conditions by
+						Kromatika.Finance
 					</p>
-					<input type="checkbox" id="dontShowAgain" />
-				</div>
-				<div style="
-							display: flex;
-							justify-content: center;
-							padding-bottom: 10px;
-							padding-top: 20px;
-						">
-					<button id="closeBtn" style="
-								background-color: #b7d5d4;
-								border: 0;
-								border-radius: 15px;
-								padding: 15px;
-								padding-left: 50px;
-								padding-right: 50px;
+					<div style="justify-content: center; display:flex; flex-direction: column;">
+						<p id="checkboxText">
+							Don't show this message again for the next 30 days.
+						</p>
+						<input type="checkbox" id="dontShowAgain" />
+					</div>
+					<div style="
+								display: flex;
+								justify-content: center;
+								padding-bottom: 10px;
+								padding-top: 20px;
 							">
-						I agree
-					</button>
+						<button id="closeBtn" style="
+									background-color: #b7d5d4;
+									border: 0;
+									border-radius: 15px;
+									padding: 15px;
+									padding-left: 50px;
+									padding-right: 50px;
+								">
+							I agree
+						</button>
+					</div>
 				</div>
-			</div>
+			</div>>
 		</div>
-	</div>
-	<div id="versionModal" class="modal" style="display: none;">
-		<!-- Modal content -->
-		<div class="modal-content" style="border-radius: 15px;">
-			<div style="width: 90%; text-align:center; align-content: center; display: table; margin: 0 auto;">
-				<p style="padding-top: 5%; font-size: large; font-weight: bold; text-align: center;">Disclaimer</p>
-				<p style="padding-top: 5%; text-align: center;">
-					There are now 2 versions of the perpetual platform.
-					</br></br>Please choose the version you want to use
-				</p>
-				<!-- <ul
-					style="display: flex; flex-direction: column; padding: 5% 0% 0% 0%; font-weight: bold; text-align: center; list-style: none;">
-					<li>
-						V3: Orderbook perpetuals with over 72 pairs
-					</li>
-					<li>
-						V4: On-chain perpetuals with 1001x lev on (Arbitrum, BNB, opBNB, Base)
-					</li>
-				</ul> -->
-				<div style="justify-content: center; display:flex; padding-top: 5%; padding-bottom: 5%;">
-					<button id="versionBtn" style="
-								background-color: #b7d5d4;
-								border: 0;
-								border-radius: 15px;
-								padding: 15px;
-								margin-right: 15px;
-								cursor: pointer;
-							">
-						Version 3
-					</button>
-					<button id="versionBtn2" style="
-								background-color: #b7d5d4;
-								border: 0;
-								border-radius: 15px;
-								padding: 15px;
-								margin-right: 15px;
-								cursor: pointer;
-							">
-						Version 4
-					</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="app"></div>
-	<script>
-		// Get the button that opens the modal
-		var cookieBtn = document.getElementById("closeBtn");
-		var versionBtn = document.getElementById("versionBtn");
-		var versionBtn2 = document.getElementById("versionBtn2");
-		var versionBtn3 = document.getElementById("versionBtn3");
-		var cookieModal = document.getElementById("cookieModal");
-		var versionModal = document.getElementById("versionModal")
-		// When the user clicks on the button, open the modal
-		cookieBtn.onclick = function () {
+		<div id="app"></div>
+		<script>
+			var cookieBtn = document.getElementById("closeBtn");
+			var cookieModal = document.getElementById("cookieModal");
+			// When the user clicks on the button, open the modal
+			cookieBtn.onclick = function () {
 			//Check if checkbox is ticked
 			if (dontShowAgain.checked) {
 				// Set date of validation to local storage
 				localStorage.setItem('KromApolloxTOUTicked', Date.now().toString())
 			}
 			cookieModal.style.display = "none";
-			versionModal.style.display = "block";
+			
 		};
+			const { origin, protocol, pathname } = window.location;
+			const isDev = protocol === "http:";
+			FuturesSDK.createTradeUI({
+				container: document.getElementById("app"),
+				config: {
+					isTestnet: false,
+					staticBaseUrl: `${origin}/s3/v4/static/`, // in production, you have to change this to your static base url
+					apiBaseUrl: isDev ? `${origin}` : undefined, // in production, you don't need to configurate this, it's default as APX's url
+					graphqlTemplateUrl: 'https://api.thegraph.com/subgraphs/name/apollx-apx/apollox-perp-{{network}}',  // graphql template url
+					futuresWsHost: "wss://fstream.apollox.finance/plain",
+					sensorsServerHost: 'https://sensors.apollox.cloud/sa?project=default',
+					enableThemeToggle: false,
+					brokerId: 32,
+					palette: {
+						slider: {
+							radioButtonBorderColor: '#FFFFFF',
+						}
+					},
+					features: {
+						referral: {
+							enabled: true
+						}
+					},
+					headerConfig: {
+						disable: false,
+						logo: {
+							darkImgUrl: '/public/kromatika_logo.png',
+							lightImgUrl: '/public/kromatika_logo.png',
+							navTo: "https://app.kromatika.finance/#/pool",
+						},
+						token: {
+							// This line makes the header buggy because logo is not displayed properly
+							imgUrl: `https://static.coinpaprika.com/coin/krom-kromatikafinance/logo.png?rev=10691015`,
+							navTo: 'https://coinmarketcap.com/currencies/kromatika/',
+							lpPairAddress: '0x6ae0cdc5d2b89a8dcb99ad6b3435b3e7f7290077',
+							lpBaseAddress: '0x3af33bef05c2dcb3c7288b77fe1c8d2aeba4d789',
+							lpQuoteAddress: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+							network: 'eth',
+							pricePrecision: 8,
+						},
+						menu: {
+							data: [],
+							placement: "left",
+						},
+						customerService: {
+							navTo: 'https://medium.com/apx-finance/apollox-will-be-migrating-customer-support-to-discord-6a89846d67f6',
+						},
+					},
+					supportNetworks: ["bnb", "arb", "opbnb", "base"],
+					// darkPalette: {
+					// 	primaryHover: "#7994f6", // background hover
+					// 	primary: "#7994f6", // background; text hover,
 
-		versionBtn.onclick = function () {
-			versionModal.style.display = "none";
-			window.location = '/v3.html'
-		};
-		versionBtn2.onclick = function () {
-			versionModal.style.display = "none";
-			window.location = '/v4.html'
-		};
-		
-		document.addEventListener("DOMContentLoaded", function (event) {
+					// 	badgeYellowBg: "#1E1F31",
+					// },
+					loadingImage: {
+						url: "/public/loading.gif",
+					},
+					defaultTheme: "dark",
+					fontFamily: "Eina-Regular",
+					fontUrl: "/public/fonts/Eina02-Regular.ttf",
+				},
+				state: {
+					symbol: "ETHUSD",
+					lng: "en",
+				},
+			});
+			FuturesSDK.eventListener.on('symbolChange', (data) => {
+				console.log('symbol change', data.symbol)
+				window.history.replaceState({}, null, data.symbol);
+			})
+			document.addEventListener("DOMContentLoaded", function (event) {
 			//Check for already existing validation 
 			const tickingDate = localStorage.getItem('KromApolloxTOUTicked')
 			const millis = Date.now() - tickingDate
 			if (!tickingDate || (Math.floor(millis / 1000 / 60 / 60 / 24) > 30)) {
 				cookieModal.style.display = "block";
-			} else {
-				versionModal.style.display = "block";
 			}
-		})
-	</script>
-</body>
-
+			// } else {
+			// 	versionModal.style.display = "block";
+			// }
+			});
+			// For debug purposes
+			// FuturesSDK.eventListener.on('startLoad', () =>  console.log('startLoad event received'))
+		</script>
+	</body>
 </html>
